@@ -33,13 +33,30 @@ public class MyServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        response.setContentType("text/html;charset=UTF-8");
+        
+        String origin = request.getParameter("origin");
+        switch (origin) {
+            case "index":
+                index(request, response);
+                break;
+            case "login":
+                login(request, response);
+                break;
+            default:
+                throw new AssertionError();
+        }
+        
+    }
+    private void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        
+        // ville normalt komme fra databasen.
         Map<Integer,Person> persons = new HashMap();
         persons.put(1, new Person("Hanne", 93, "Østre strandvej 3"));
         persons.put(2, new Person("Josephine", 24, "Østre strandvej 21"));
         persons.put(3, new Person("Karim", 41, "Østre strandvej 94"));
         persons.put(4, new Person("Karen", 44, "Østre strandvej 12"));
-        
-        response.setContentType("text/html;charset=UTF-8");
         
         // getParameter kommer fra brugeren via requestet
         String username = request.getParameter("username");
@@ -51,6 +68,9 @@ public class MyServlet extends HttpServlet {
         request.getSession().setAttribute("username", username);
         
         request.getRequestDispatcher("view.jsp").forward(request, response);
+    }
+    private void login(HttpServletRequest req, HttpServletResponse res){
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -13,6 +13,6 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <a href="MyServlet?username=Palle">click here</a>
+        <a href="MyServlet?origin=index&username=Palle">click here</a>
     </body>
 </html>
